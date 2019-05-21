@@ -29,13 +29,14 @@ class Phrase{
         }   
       
        document.getElementById("phrase").innerHTML = liArr;        
-       return liArr;
+       return selectedPhrase;
    }
 
    checkLetter(char){
     var selectedPhrase = this.addPhraseToDisplay(); 
-    var x = selectedPhrase.includes(char)
     console.log('the phrase is ' + selectedPhrase);
+    var x = selectedPhrase.includes(char)
+    console.log(x);
     console.log('the letter chosen is ' + char);
     if(x){
         console.log(char + ' is in the phrase ');
