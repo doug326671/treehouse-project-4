@@ -19,17 +19,21 @@ class Phrase{
        var createLi = document.createElement("LI");
        putLiInCorrectDiv.appendChild(createLi);
        
+
         for(var i = 0; i < selectedPhrase.length; i++){
             if(selectedPhrase[i]=== " "){
                liArr += '<li class = "space"> </li>';
             }else{
-           liArr += '<li class = "letter '  + '">' +selectedPhrase[i]+'</li> ';
+
+ liArr += '<li class = "letter ' +selectedPhrase[i]+'">' +selectedPhrase[i]+'</li> ';
 
             }
         }   
       
        document.getElementById("phrase").innerHTML = liArr;        
-       return selectedPhrase;
+
+ 
+              return selectedPhrase;
    }
 
    checkLetter(char){
@@ -51,15 +55,47 @@ class Phrase{
    
         
     
-   showMatchedLetter(x){
-     var theLetterToBeShown= this.checkLetter(x);
+   showMatchedLetter(letterFromAppJs){
+     var theLetterToBeShown= this.checkLetter(letterFromAppJs);
      console.log(theLetterToBeShown);
      var selectedPhrase = this.addPhraseToDisplay(); 
-     var theLetters = document.getElementsByClassName('letter').className = "show";
-     console.log(theLetters);
+//     var theLetters = document.getElementById('phrase').className = "show";
+     //console.log(theLetters);
      if(selectedPhrase.includes(theLetterToBeShown)){
+
+if (theLetterToBeShown) {
+
+ 
+    if (theLetterToBeShown == "a") {
+
+        var listofthisletter = document.querySelectorAll('.letter.a')
+
+        for (var i = 0; i < listofthisletter.length; i++) {
+            listofthisletter[i].classList.remove('letter');
+            listofthisletter[i].classList.add('show');
+           
+          }
+
+    }
+    
+    
+    if (theLetterToBeShown == "j") {
+
+        var listofthisletter = document.querySelectorAll('.letter.j')
+
+        for (var i = 0; i < listofthisletter.length; i++) {
+            listofthisletter[i].classList.remove('letter');
+            listofthisletter[i].classList.add('show');
+           
+          }
+
+    }
+
+
+}
         console.log('show the letter '+ theLetterToBeShown);
-        theLetters = theLetterToBeShown;
+        var theLetters = theLetterToBeShown;
+
 
      }
    }
