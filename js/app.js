@@ -73,7 +73,9 @@ for (var i = 0; i < keyboard.length; i++){
     keyboard[i].onclick= function (){
         var attribute = this.innerHTML;
         letter=attribute;
-        phrase.checkLetter(letter);
+        var letterToBeDisplayed = phrase.checkLetter(letter);
+        //console.log(letterToBeDisplayed);
+        phrase.showMatchedLetter(letterToBeDisplayed);
     };
       
 }

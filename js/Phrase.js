@@ -23,7 +23,7 @@ class Phrase{
             if(selectedPhrase[i]=== " "){
                liArr += '<li class = "space"> </li>';
             }else{
-           liArr += '<li class = "letter ' + selectedPhrase[i] + '">' +selectedPhrase[i]+'</li> ';
+           liArr += '<li class = "letter '  + '">' +selectedPhrase[i]+'</li> ';
 
             }
         }   
@@ -35,25 +35,34 @@ class Phrase{
    checkLetter(char){
     var selectedPhrase = this.addPhraseToDisplay(); 
     console.log('the phrase is ' + selectedPhrase);
-    var x = selectedPhrase.includes(char)
-    console.log(x);
+    var isLetterInPhrase = selectedPhrase.includes(char)
     console.log('the letter chosen is ' + char);
-    if(x){
+    var theLetterToBeShown = "";
+    if(isLetterInPhrase){
         console.log(char + ' is in the phrase ');
+        theLetterToBeShown = char;
     }else{
         console.log(char + ' is not in the phrase ');
-
+        theLetterToBeShown = "";
     }
-   
+   return theLetterToBeShown;
 }
 
    
         
     
-//    showMatchedLetter(){
-//      var x = this.checkLetter();
-//      console.log(x);
-//    }
+   showMatchedLetter(x){
+     var theLetterToBeShown= this.checkLetter(x);
+     console.log(theLetterToBeShown);
+     var selectedPhrase = this.addPhraseToDisplay(); 
+     var theLetters = document.getElementsByClassName('letter').className = "show";
+     console.log(theLetters);
+     if(selectedPhrase.includes(theLetterToBeShown)){
+        console.log('show the letter '+ theLetterToBeShown);
+        theLetters = theLetterToBeShown;
+
+     }
+   }
    
 }
 
@@ -65,7 +74,11 @@ class Phrase{
 
 
 
-
+// for(var i = 0; i<theLetters; i++){
+//     if(theLetters[i] == theLetterToBeShown){
+//      console.log(theLetters[i]);
+//     }
+// }
 
 
 
