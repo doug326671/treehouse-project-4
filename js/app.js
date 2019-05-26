@@ -75,7 +75,8 @@ for (var i = 0; i < keyboard.length; i++){
         letter=attribute;
         var letterToBeDisplayed = phrase.checkLetter(letter);
         //console.log(letterToBeDisplayed);
-        phrase.showMatchedLetter(letterToBeDisplayed);
+         phrase.showMatchedLetter(letterToBeDisplayed);
+
     };
       
 }
