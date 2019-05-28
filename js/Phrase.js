@@ -33,11 +33,11 @@ class Phrase{
        document.getElementById("phrase").innerHTML = liArr;        
 
  
-              return selectedPhrase;
+    return selectedPhrase;
    }
 
    checkLetter(char){
-    var selectedPhrase = this.addPhraseToDisplay(); 
+    var selectedPhrase = this.phrase; 
     console.log('the phrase is ' + selectedPhrase);
     var isLetterInPhrase = selectedPhrase.includes(char)
     console.log('the letter chosen is ' + char);
@@ -58,15 +58,15 @@ class Phrase{
    showMatchedLetter(letterFromAppJs){
      var theLetterToBeShown= this.checkLetter(letterFromAppJs);
      console.log(theLetterToBeShown);
-     var selectedPhrase = this.addPhraseToDisplay(); 
-     if(selectedPhrase.includes(theLetterToBeShown)){
+     var selectedPhrase = this.phrase; //this.addPhraseToDisplay(); 
 
+     if(selectedPhrase.includes(theLetterToBeShown)){
         if (theLetterToBeShown) {
             if (theLetterToBeShown == "a") {
                 var listofthisletter = document.querySelectorAll('.letter.a')
                     for (var i = 0; i < listofthisletter.length; i++) {
-                        listofthisletter[i].classList.remove('letter');
-                        listofthisletter[i].classList.add('show');
+                        listofthisletter[i].classList.replace('letter','show');
+                        //listofthisletter[i].classList.add('show');
                     }
                 }
                 if (theLetterToBeShown == "b") {
@@ -95,8 +95,8 @@ class Phrase{
                 if (theLetterToBeShown == "e") {
                     var listofthisletter = document.querySelectorAll('.letter.e')
                     for (var i = 0; i < listofthisletter.length; i++) {
-                    listofthisletter[i].classList.remove('letter');
-                    listofthisletter[i].classList.add('show');
+                    listofthisletter[i].classList.replace('letter','show');
+                    //listofthisletter[i].classList.add('show');
                     }
                 }
                 if (theLetterToBeShown == "f") {
@@ -249,7 +249,7 @@ class Phrase{
         }
         
      }
-     
+     return theLetterToBeShown;
    }
    
 }

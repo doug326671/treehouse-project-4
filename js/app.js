@@ -56,7 +56,7 @@ var game;
 var phrase;
 
 var buttonReset = document.getElementById("btn__reset");
-
+var letterToBeDisplayed;
 buttonReset.addEventListener('click',function(){
     document.getElementById("overlay").style.display='none';
     game = new Game();
@@ -65,18 +65,19 @@ buttonReset.addEventListener('click',function(){
     console.log(`Active Phrase - phrase: ${activePhrase}`);
     phrase = new Phrase(activePhrase);
     phrase.checkLetter();
+    console.log(phrase);
 });
 
 var keyboard = document.querySelectorAll(".key");
-
+//var rewriteThePhrase = [];
 for (var i = 0; i < keyboard.length; i++){
     keyboard[i].onclick= function (){
         var attribute = this.innerHTML;
         letter=attribute;
-        var letterToBeDisplayed = phrase.checkLetter(letter);
+        letterToBeDisplayed = phrase.showMatchedLetter(letter);
         //console.log(letterToBeDisplayed);
-         phrase.showMatchedLetter(letterToBeDisplayed);
-
+        //rewriteThePhrase= phrase.showMatchedLetter(letterToBeDisplayed);
+        //console.log(rewriteThePhrase);
     };
       
 }
