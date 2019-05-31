@@ -52,11 +52,12 @@
 
 
 var game;
-//var handleInteraction;
+var keyboard = document.querySelectorAll(".key");
 var phrase;
-
 var buttonReset = document.getElementById("btn__reset");
 var letterToBeDisplayed;
+
+
 buttonReset.addEventListener('click',function(){
     document.getElementById("overlay").style.display='none';
     game = new Game();
@@ -68,19 +69,34 @@ buttonReset.addEventListener('click',function(){
     console.log(phrase);
 });
 
-var keyboard = document.querySelectorAll(".key");
-//var rewriteThePhrase = [];
+
+
 for (var i = 0; i < keyboard.length; i++){
     keyboard[i].onclick= function (){
         var attribute = this.innerHTML;
         letter=attribute;
         letterToBeDisplayed = phrase.showMatchedLetter(letter);
-        //console.log(letterToBeDisplayed);
-        //rewriteThePhrase= phrase.showMatchedLetter(letterToBeDisplayed);
-        //console.log(rewriteThePhrase);
+        console.log(letterToBeDisplayed);
+        numberOfCorrectGuesses = game.checkForWin(letterToBeDisplayed);
+        //console.log(numberOfCorrectGuesses);
     };
       
 }
 
 
+// if(numberOfCorrectGuesses == true){
+//     keepTrackOfCorrectGuesses++;
+//     console.log(keepTrackOfCorrectGuesses);
+// }
 
+
+
+
+//var rewriteThePhrase = [];
+
+
+
+
+//console.log(letterToBeDisplayed);
+        //rewriteThePhrase= phrase.showMatchedLetter(letterToBeDisplayed);
+        //console.log(rewriteThePhrase);

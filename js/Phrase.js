@@ -249,7 +249,7 @@ class Phrase{
         }
         
      }
-     return theLetterToBeShown;
+     return listofthisletter;
    }
    
 }
