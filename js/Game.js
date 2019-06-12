@@ -52,24 +52,34 @@
     var getTheNumberOfSpacesInThePhrase = document.getElementsByClassName('space').length//getElementById('phrase').getElementsByTagName('LI');
     var getTheNumberOfli = document.getElementById("phrase").getElementsByTagName("LI").length;
     var getli = document.getElementById("phrase").getElementsByTagName("LI")
-    console.log('there are ' + getTheNumberOfSpacesInThePhrase + ' number of spaces in the phrase');
-    console.log(letter);
-    console.log('there are  '+ getTheNumberOfli + ' number of li tags total');
-    console.log(getli);
+    // console.log('there are ' + getTheNumberOfSpacesInThePhrase + ' number of spaces in the phrase');
+    // console.log(letter);
+    // console.log('there are  '+ getTheNumberOfli + ' number of li tags total');
+    // console.log(getli);
     var keepTrackOfShow = getTheNumberOfSpacesInThePhrase;
     for(var i = 0; i <getli.length; i++){
-        console.log(getli[i].classList.contains('show'));
+        // console.log(getli[i].classList.contains('show'));
         if(getli[i].classList.contains('show')){
             keepTrackOfShow++;
-            console.log(keepTrackOfShow);
+            // console.log(keepTrackOfShow);
             if(keepTrackOfShow==getTheNumberOfli){
                 alert('you won');
             }
         }
     }
-    
-    
-  
+    return letter;
+ }
+
+ removeLife(){
+    var missedSelections = 0;
+    console.log('the letter was not in the phrase');
+    var hearts = document.getElementsByClassName("tries").length;
+    console.log("the number of hearts is " + hearts);
+    for(var i = 0; i < hearts.length; i++){
+        if(hearts[i]<=5){
+            hearts[i].setAttribute('src','./images/lostHeart.png');
+        }
+    }
  }
     
 }

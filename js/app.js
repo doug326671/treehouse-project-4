@@ -76,9 +76,16 @@ for (var i = 0; i < keyboard.length; i++){
         var attribute = this.innerHTML;
         letter=attribute;
         letterToBeDisplayed = phrase.showMatchedLetter(letter);
-        console.log(letterToBeDisplayed);
+        // console.log("what is the letter" + letterToBeDisplayed);
         numberOfCorrectGuesses = game.checkForWin(letterToBeDisplayed);
         //console.log(numberOfCorrectGuesses);
+        if(letterToBeDisplayed == undefined){
+            numberOfMisses = game.removeLife();
+            //console.log(numberOfMisses);
+        }
+        
+        //console.log(numberOfCorrectGuesses);
+        
     };
       
 }
