@@ -1,109 +1,28 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * app.js */
 
-// const phrase = new Phrase('life IS Like great'.toLowerCase());
-// console.log(`Phrase - phrase: ${phrase.phrase}`);
-
-
- //const game = new Game();
-
- //const randomPhrase = game.startGame();
- //console.log(randomPhrase);
-// const phrase = new Phrase(randomPhrase);
-// console.log(phrase);
-// console.log(phrase.phraseSaying);
-// phrase.phraseSaying;
+// const game = new Game();
 // game.startGame();
+// console.log(`Active Phrase - phrase: ${game.activePhrase}`);
+
+var newusertypedDiv = document.createElement('div');
+newusertypedDiv.className = "usertype";
+newusertypedDiv.id = 'typedDiv';
+document.body.appendChild(newusertypedDiv);
 
 
-// call the start game method and put it in the active pharse that is in the constructor
-//game.startGame();
-//console.log(`Active Phrase - phrase: ${game.activePhrase}`);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var game;
-var keyboard = document.querySelectorAll(".key");
-var phrase;
+var game = new Game();
+var phrase = new Phrase();
 var buttonReset = document.getElementById("btn__reset");
-var letterToBeDisplayed;
-
 
 buttonReset.addEventListener('click',function(){
     document.getElementById("overlay").style.display='none';
-    game = new Game();
-    game.startGame();
-    var activePhrase = game.activePhrase;
-    console.log(`Active Phrase - phrase: ${activePhrase}`);
-    phrase = new Phrase(activePhrase);
-    phrase.checkLetter();
-    console.log(phrase);
-});
-
-
-
-for (var i = 0; i < keyboard.length; i++){
-    keyboard[i].onclick= function (){
-        var attribute = this.innerHTML;
-        letter=attribute;
-        letterToBeDisplayed = phrase.showMatchedLetter(letter);
-        // console.log("what is the letter" + letterToBeDisplayed);
-        numberOfCorrectGuesses = game.checkForWin(letterToBeDisplayed);
-        //console.log(numberOfCorrectGuesses);
-        if(letterToBeDisplayed == undefined){
-            numberOfMisses = game.removeLife();
-            //console.log(numberOfMisses);
-        }
-        
-        //console.log(numberOfCorrectGuesses);
-        
-    };
+        // this.activePhrase = this.getRandomPhrase().toLowerCase();
+         //game = new Game();
+         game.startGame();
+         
       
-}
+});
+game.handleInteraction();
+//console.log(game.handleInteraction());
+// game.checkForWin();
 
 
-// if(numberOfCorrectGuesses == true){
-//     keepTrackOfCorrectGuesses++;
-//     console.log(keepTrackOfCorrectGuesses);
-// }
-
-
-
-
-//var rewriteThePhrase = [];
-
-
-
-
-//console.log(letterToBeDisplayed);
-        //rewriteThePhrase= phrase.showMatchedLetter(letterToBeDisplayed);
-        //console.log(rewriteThePhrase);

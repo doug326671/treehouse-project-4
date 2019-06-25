@@ -1,170 +1,162 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Game.js */
+class Game{
+    constructor(){
+        this.missed = 0;
+        this.phrases = this.createPhrases();
+        this.activePhrase = this.getRandomPhrase();
+        
+    }
 
- class Game{
-     constructor(missed,phrase,activePhrase){
-         this.missed = missed;
-         this.phrase = phrase;
-         this.activePhrase = activePhrase;
-         
-     }
-     get createPhrases(){
-         this.phrases = [
+  
+/**
+* Creates phrases for use in game
+* @return {array} An array of phrases that could be used in the game
+*/
+    createPhrases(){
+    const newPhrases = [
         'may the force be with you', 
         'just do it',
         'just keep coding',
         'there is no trying',
-        'practice makes perfect'
-        ]
-         return this.phrases;
-     }
+        'practice makes perfect',
+    ];
+    
+    
 
-     get phrases(){
-         return this._phrases;
-     }
+    return newPhrases;
+   }
 
-     
-     set phrases(phrases){
-         this._phrases=phrases; // storing value here in _phrases
-         //console.log(`setter called: ${phrases}`);//this shows that it has been called
-     }
-
-     // select random phrase from the phrase property
-     getRandomPhrase(){
+/**
+* Selects random phrase from phrases property
+* @return {Object} Phrase object chosen to be used
+*/
+   getRandomPhrase(){
          
-         var arrayLength =(Math.floor( Math.random() * (this.createPhrases.length)));
-         //console.log(arrayLength);
-         var randomPhrase = this.createPhrases[arrayLength];
-         return randomPhrase;
+    const randomPhrase = this.phrases[Math.floor(Math.random() * this.phrases.length)];  
+    return randomPhrase;
     }
 
-    startGame(){
+/**
+* Begins game by selecting a random phrase and displaying it to user
+*/
+    startGame() {
+       
+        var thePhrase = this.activePhrase;
+        const phrase = new Phrase(thePhrase);
+        phrase.addPhraseToDisplay();
+    }
+
+
+
+    handleInteraction() {
+        const phrase = new Phrase();
+        //phrase.checkLetter('a');
+        var keyboard = document.querySelectorAll(".key");
+        for (var i = 0; i < keyboard.length; i++){
+           keyboard[i].onclick= function (){
+               var attribute = this.innerHTML;
+               var letter=attribute;
+               var letterToBeDisplayed = phrase.checkLetter(letter);
+               console.log("letterToBeDisplayed is " + letterToBeDisplayed);
+               console.log(letter);
+               if(letterToBeDisplayed){
+                   phrase.showMatchedLetter(letter);
+                   
+               }
+               
+               
+               var typedDivval = document.getElementById('typedDiv').innerHTML;
+               typedDivval = typedDivval + letter;
+               document.getElementById('typedDiv').innerHTML = typedDivval;
+               
+               game.checkForWin();
+               
+               // console.log("what is the letter" + letterToBeDisplayed);
+               //var numberOfCorrectGuesses = game.checkForWin(letterToBeDisplayed);
+               //console.log(numberOfCorrectGuesses);
+            //    if(letterToBeDisplayed == undefined){
+            //        numberOfMisses = game.removeLife();
+            //        //console.log(numberOfMisses);
+            //    }
+               
+               //console.log(numberOfCorrectGuesses);
+               
+           }
+            
+        };
         
-        var phrase = this.getRandomPhrase();
-        var selectedPhrase = new Phrase(phrase);
-        selectedPhrase.addPhraseToDisplay();
-        this.activePhrase = phrase;
-        return this.activePhrase;
     }
 
- checkForWin(letter){
-    var getTheNumberOfSpacesInThePhrase = document.getElementsByClassName('space').length//getElementById('phrase').getElementsByTagName('LI');
-    var getTheNumberOfli = document.getElementById("phrase").getElementsByTagName("LI").length;
-    var getli = document.getElementById("phrase").getElementsByTagName("LI")
-    // console.log('there are ' + getTheNumberOfSpacesInThePhrase + ' number of spaces in the phrase');
-    // console.log(letter);
-    // console.log('there are  '+ getTheNumberOfli + ' number of li tags total');
-    // console.log(getli);
-    var keepTrackOfShow = getTheNumberOfSpacesInThePhrase;
-    for(var i = 0; i <getli.length; i++){
-        // console.log(getli[i].classList.contains('show'));
-        if(getli[i].classList.contains('show')){
-            keepTrackOfShow++;
-            // console.log(keepTrackOfShow);
-            if(keepTrackOfShow==getTheNumberOfli){
-                alert('you won');
+
+
+    checkForWin(){        
+        var thePhrase = this.activePhrase.split("");
+        var youWin = document.getElementById("overlay");
+        var element = document.getElementById("game-over-message");
+        var para = document.createElement("p");
+        var node = document.createTextNode("You win");
+        
+        console.log(thePhrase);
+        var theNumberOfChars = thePhrase.length//get the number of chars
+        console.log(theNumberOfChars);
+        var typedDivval = document.getElementById('typedDiv').innerHTML;
+        var thePhrasetotest = thePhrase;
+        thePhrasetotest = thePhrasetotest.toString().replace(/[\W_]+/g,"");
+        var phrasearray = thePhrasetotest.split("");
+
+        var didiwin = 1;
+
+        for (var i = 0; i < phrasearray.length; i++){
+
+            var doesit = typedDivval.includes(phrasearray[i]);
+            console.log("comparing phrase letter " + phrasearray[i] + " with " + typedDivval);
+            if (doesit == false) {
+
+                didiwin = 0;
+            
+            
+            // Decrement Hearts
+            
             }
-        }
-    }
-    return letter;
- }
 
- removeLife(){
-    var missedSelections = 0;
-    console.log('the letter was not in the phrase');
-    var hearts = document.getElementsByClassName("tries").length;
-    console.log("the number of hearts is " + hearts);
-    for(var i = 0; i < hearts.length; i++){
-        if(hearts[i]<=5){
-            hearts[i].setAttribute('src','./images/lostHeart.png');
         }
-    }
- }
+
+        if (didiwin == 1) {
+
+                 // Show that they won
+                //  console.log("I Won. Yay!");
+                //  document.getElementById('qwerty').innerHTML = "";
+                //  document.getElementById('phrase').innerHTML = "";
+                //  document.getElementById('banner').innerHTML = "<CENTER>Congratulations! You Won!</CENTER>";
+                //  document.getElementById('scoreboard').innerHTML = "";
+                //  //document.getElementById('overlay').replace(win);
+                //  document.getElementById("overlay");
+                para.appendChild(node);
+                youWin.style.display='inline';
+                youWin.classList.add('win');
+                element.appendChild(para);
+                //element.insertBefore(para, child);
+                //youWin.innerHTML = "<CENTER>Congratulations! You Won!</CENTER>";
+                //elements.style.display = 'red';
+
+        }
+     }
     
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // var whatIsThePhrase = getTheNumberOfSpacesInThePhrase;
-    // console.log(whatIsThePhrase);
-
-
-
-
-
-
-   // for(var i = 0; i < getTheNumberOfSpacesInThePhrase.length; i++){
-    //     console.log(getTheNumberOfSpacesInThePhrase[i].classList.contains('show'));
-    //     if(getTheNumberOfSpacesInThePhrase[i].classList.contains('show')){
-    //         keepTrackOfShow++;
-    //         console.log(keepTrackOfShow);
-    //         if(keepTrackOfShow==whatIsThePhrase){
-    //             alert('you won')
-    //         }
-    //     }
-    // }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- //const game = new Game();
- //console.log(game.getRandomPhrase());
-
-//  this.phrase = function(){
-//     const phrase = new Phrase(this.randomPhrase);
-//     phrase.phraseSaying;
-    
-// }
-
-// if(letterToBeDisplayed == undefined){
-//     alert('no letter in phrase');
-//     isLetterThere = false;
-// }else{
-//     alert('letter in phrase');
-//     isLetterThere = true;
+// var getTheNumberOfli = document.getElementById("phrase").getElementsByTagName("LI").length;
+// var getli = document.getElementById("phrase").getElementsByTagName("LI")
+// console.log('there are ' + getTheNumberOfSpacesInThePhrase + ' number of spaces in the phrase');
+// //console.log(letter);
+// console.log('there are  '+ getTheNumberOfli + ' number of li tags total');
+// console.log(getli);
+// var keepTrackOfShow = getTheNumberOfSpacesInThePhrase;
+// for(var i = 0; i <getli.length; i++){
+//     // console.log(getli[i].classList.contains('show'));
+//     if(getli[i].classList.contains('show')){
+//         keepTrackOfShow++;
+//         // console.log(keepTrackOfShow);
+//         if(keepTrackOfShow==getTheNumberOfli){
+//             alert('you won');
+//         }
+//     }
 // }
