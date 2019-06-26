@@ -49,6 +49,7 @@ class Game{
 
     handleInteraction() {
         const phrase = new Phrase();
+        var misses = 1;
         //phrase.checkLetter('a');
         var keyboard = document.querySelectorAll(".key");
         for (var i = 0; i < keyboard.length; i++){
@@ -56,11 +57,15 @@ class Game{
                var attribute = this.innerHTML;
                var letter=attribute;
                var letterToBeDisplayed = phrase.checkLetter(letter);
-               console.log("letterToBeDisplayed is " + letterToBeDisplayed);
-               console.log(letter);
+               //console.log("letterToBeDisplayed is " + letterToBeDisplayed);
+               //console.log(letter);
                if(letterToBeDisplayed){
                    phrase.showMatchedLetter(letter);
                    
+               }else{
+                game.removeLife(misses);
+                var x = misses++
+                //console.log(misses++);
                }
                
                
@@ -69,16 +74,6 @@ class Game{
                document.getElementById('typedDiv').innerHTML = typedDivval;
                
                game.checkForWin();
-               
-               // console.log("what is the letter" + letterToBeDisplayed);
-               //var numberOfCorrectGuesses = game.checkForWin(letterToBeDisplayed);
-               //console.log(numberOfCorrectGuesses);
-            //    if(letterToBeDisplayed == undefined){
-            //        numberOfMisses = game.removeLife();
-            //        //console.log(numberOfMisses);
-            //    }
-               
-               //console.log(numberOfCorrectGuesses);
                
            }
             
@@ -90,14 +85,6 @@ class Game{
 
     checkForWin(){        
         var thePhrase = this.activePhrase.split("");
-        var youWin = document.getElementById("overlay");
-        var element = document.getElementById("game-over-message");
-        var para = document.createElement("p");
-        var node = document.createTextNode("You win");
-        
-        console.log(thePhrase);
-        var theNumberOfChars = thePhrase.length//get the number of chars
-        console.log(theNumberOfChars);
         var typedDivval = document.getElementById('typedDiv').innerHTML;
         var thePhrasetotest = thePhrase;
         thePhrasetotest = thePhrasetotest.toString().replace(/[\W_]+/g,"");
@@ -108,55 +95,74 @@ class Game{
         for (var i = 0; i < phrasearray.length; i++){
 
             var doesit = typedDivval.includes(phrasearray[i]);
-            console.log("comparing phrase letter " + phrasearray[i] + " with " + typedDivval);
             if (doesit == false) {
 
                 didiwin = 0;
-            
-            
-            // Decrement Hearts
             
             }
 
         }
 
         if (didiwin == 1) {
-
-                 // Show that they won
-                //  console.log("I Won. Yay!");
-                //  document.getElementById('qwerty').innerHTML = "";
-                //  document.getElementById('phrase').innerHTML = "";
-                //  document.getElementById('banner').innerHTML = "<CENTER>Congratulations! You Won!</CENTER>";
-                //  document.getElementById('scoreboard').innerHTML = "";
-                //  //document.getElementById('overlay').replace(win);
-                //  document.getElementById("overlay");
-                para.appendChild(node);
-                youWin.style.display='inline';
-                youWin.classList.add('win');
-                element.appendChild(para);
-                //element.insertBefore(para, child);
-                //youWin.innerHTML = "<CENTER>Congratulations! You Won!</CENTER>";
-                //elements.style.display = 'red';
-
+            
+            game.gameOver();
+        }else{
+            
         }
      }
-    
-}
 
-// var getTheNumberOfli = document.getElementById("phrase").getElementsByTagName("LI").length;
-// var getli = document.getElementById("phrase").getElementsByTagName("LI")
-// console.log('there are ' + getTheNumberOfSpacesInThePhrase + ' number of spaces in the phrase');
-// //console.log(letter);
-// console.log('there are  '+ getTheNumberOfli + ' number of li tags total');
-// console.log(getli);
-// var keepTrackOfShow = getTheNumberOfSpacesInThePhrase;
-// for(var i = 0; i <getli.length; i++){
-//     // console.log(getli[i].classList.contains('show'));
-//     if(getli[i].classList.contains('show')){
-//         keepTrackOfShow++;
-//         // console.log(keepTrackOfShow);
-//         if(keepTrackOfShow==getTheNumberOfli){
-//             alert('you won');
-//         }
-//     }
-// }
+     gameOver(numOfMisses){
+
+        var misses = numOfMisses;
+        console.log("remove life "+ numOfMisses);
+
+        if(numOfMisses!=true){
+
+        var youWin = document.getElementById("overlay");
+        var element = document.getElementById("game-over-message");
+        var para = document.createElement("p");
+        var node = document.createTextNode("You Won!");
+        para.appendChild(node);
+        youWin.style.display='block';
+        youWin.classList.add('win');
+        element.appendChild(para);
+        element.classList.add('win');
+        }else if(misses==true){
+        var youWin = document.getElementById("overlay");
+        var element = document.getElementById("game-over-message");
+        var para = document.createElement("p");
+        var node = document.createTextNode("Better Luck Next Time!");
+        para.appendChild(node);
+        youWin.style.display='block';
+        youWin.classList.add('lose');
+        element.appendChild(para);
+        element.classList.add('lose');
+        }
+     }
+
+     removeLife(missed){
+        //var hearts = document.getElementsByClassName("tries");
+        
+        var misses = missed++;
+        
+        this.missed = misses;
+        console.log("you missed:  " + this.missed);
+        if(this.missed == 5){
+            game.gameOver(true);
+        }
+        return misses
+        
+        }
+        
+
+}
+    
+
+
+//for(var i = 0; i < hearts.length; i++){
+    //     //console.log(hearts[i]);
+    //     if(missed<5){
+    //         misses+1;
+    //         console.log(misses);
+    //     }
+    //     }

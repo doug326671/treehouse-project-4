@@ -34,13 +34,14 @@ class Phrase{
 * @param (string) letter - Letter to check
 */
 checkLetter(char) {
-        //var game = new Game();
+        
         const selectedPhrase = game.activePhrase.split('');
-        console.log(selectedPhrase);
+        //console.log(selectedPhrase);
         var isLetterThere = selectedPhrase.includes(char);
-        console.log(isLetterThere);
+        //console.log(isLetterThere);
+        
         if(isLetterThere){
-            //game.checkForWin();
+            
             return true;
             
         }else{
