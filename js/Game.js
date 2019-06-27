@@ -50,22 +50,24 @@ class Game{
     handleInteraction() {
         const phrase = new Phrase();
         var misses = 1;
-        //phrase.checkLetter('a');
         var keyboard = document.querySelectorAll(".key");
         for (var i = 0; i < keyboard.length; i++){
            keyboard[i].onclick= function (){
+
+               //var y = onclick=this.disabled=true;
                var attribute = this.innerHTML;
                var letter=attribute;
                var letterToBeDisplayed = phrase.checkLetter(letter);
                //console.log("letterToBeDisplayed is " + letterToBeDisplayed);
-               //console.log(letter);
                if(letterToBeDisplayed){
                    phrase.showMatchedLetter(letter);
-                   
+                   var y = onclick=this.disabled=true;
+                   this.classList.add('chosen');
                }else{
                 game.removeLife(misses);
+                var y = onclick=this.disabled=true;
+               this.classList.add('wrong');
                 var x = misses++
-                //console.log(misses++);
                }
                
                
@@ -141,10 +143,10 @@ class Game{
      }
 
      removeLife(missed){
-        //var hearts = document.getElementsByClassName("tries");
-        
+        const heartElements = document.querySelectorAll('.tries img');
+        // Changes a live heart to a lost heart.
+        heartElements[this.missed].src = 'images/lostHeart.png';
         var misses = missed++;
-        
         this.missed = misses;
         console.log("you missed:  " + this.missed);
         if(this.missed == 5){

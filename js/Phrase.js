@@ -47,6 +47,7 @@ checkLetter(char) {
         }else{
             return false;
         }
+        
     }
 
 /**
@@ -55,7 +56,7 @@ checkLetter(char) {
 */
    showMatchedLetter(letterFromGameJs){
     var theLetterToBeShown= letterFromGameJs;
-    console.log(theLetterToBeShown);
+    //console.log(theLetterToBeShown);
     var selectedPhrase = game.activePhrase; //this.addPhraseToDisplay(); 
     
     if(selectedPhrase.includes(theLetterToBeShown)){
