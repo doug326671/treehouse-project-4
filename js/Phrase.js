@@ -36,9 +36,7 @@ class Phrase{
 checkLetter(char) {
         
         const selectedPhrase = game.activePhrase.split('');
-        //console.log(selectedPhrase);
         var isLetterThere = selectedPhrase.includes(char);
-        //console.log(isLetterThere);
         
         if(isLetterThere){
             
@@ -56,8 +54,7 @@ checkLetter(char) {
 */
    showMatchedLetter(letterFromGameJs){
     var theLetterToBeShown= letterFromGameJs;
-    //console.log(theLetterToBeShown);
-    var selectedPhrase = game.activePhrase; //this.addPhraseToDisplay(); 
+    var selectedPhrase = game.activePhrase; 
     
     if(selectedPhrase.includes(theLetterToBeShown)){
        if (theLetterToBeShown) {
@@ -65,7 +62,7 @@ checkLetter(char) {
                var listofthisletter = document.querySelectorAll('.letter.a')
                    for (var i = 0; i < listofthisletter.length; i++) {
                        listofthisletter[i].classList.replace('letter','show');
-                       //listofthisletter[i].classList.add('show');
+                       
                    }
                }
                if (theLetterToBeShown == "b") {

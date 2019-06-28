@@ -54,11 +54,9 @@ class Game{
         for (var i = 0; i < keyboard.length; i++){
            keyboard[i].onclick= function (){
 
-               //var y = onclick=this.disabled=true;
                var attribute = this.innerHTML;
                var letter=attribute;
                var letterToBeDisplayed = phrase.checkLetter(letter);
-               //console.log("letterToBeDisplayed is " + letterToBeDisplayed);
                if(letterToBeDisplayed){
                    phrase.showMatchedLetter(letter);
                    var y = onclick=this.disabled=true;
@@ -116,8 +114,7 @@ class Game{
      gameOver(numOfMisses){
 
         var misses = numOfMisses;
-        console.log("remove life "+ numOfMisses);
-
+        
         if(numOfMisses!=true){
 
         var youWin = document.getElementById("overlay");
@@ -129,7 +126,15 @@ class Game{
         youWin.classList.add('win');
         element.appendChild(para);
         element.classList.add('win');
+
+        document.getElementById("btn__reset").addEventListener("click", function(){
+            location = location;
+          });
+        
+       
+                       
         }else if(misses==true){
+        
         var youWin = document.getElementById("overlay");
         var element = document.getElementById("game-over-message");
         var para = document.createElement("p");
@@ -139,12 +144,19 @@ class Game{
         youWin.classList.add('lose');
         element.appendChild(para);
         element.classList.add('lose');
+        game.startGame();
+        this.missed = 0;
+        
+        console.log(this.missed);
+
+        document.getElementById("btn__reset").addEventListener("click", function(){
+            location = location;
+          });
         }
-     }
+    }
 
      removeLife(missed){
         const heartElements = document.querySelectorAll('.tries img');
-        // Changes a live heart to a lost heart.
         heartElements[this.missed].src = 'images/lostHeart.png';
         var misses = missed++;
         this.missed = misses;
@@ -161,10 +173,3 @@ class Game{
     
 
 
-//for(var i = 0; i < hearts.length; i++){
-    //     //console.log(hearts[i]);
-    //     if(missed<5){
-    //         misses+1;
-    //         console.log(misses);
-    //     }
-    //     }
