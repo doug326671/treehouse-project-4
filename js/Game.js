@@ -47,39 +47,49 @@ class Game{
 
 
 
-    handleInteraction() {
-        const phrase = new Phrase();
-        var misses = 1;
-        var keyboard = document.querySelectorAll(".key");
-        for (var i = 0; i < keyboard.length; i++){
-           keyboard[i].onclick= function (){
+    handleInteraction(letter) {
 
-               var attribute = this.innerHTML;
-               var letter=attribute;
-               var letterToBeDisplayed = phrase.checkLetter(letter);
-               if(letterToBeDisplayed){
-                   phrase.showMatchedLetter(letter);
-                   var y = onclick=this.disabled=true;
-                   this.classList.add('chosen');
-               }else{
-                game.removeLife(misses);
-                var y = onclick=this.disabled=true;
-               this.classList.add('wrong');
-                var x = misses++
-               }
-               
-               
-               var typedDivval = document.getElementById('typedDiv').innerHTML;
-               typedDivval = typedDivval + letter;
-               document.getElementById('typedDiv').innerHTML = typedDivval;
-               
-               game.checkForWin();
-               
-           }
+        var keyboard = document.querySelectorAll(".key");
+        var misses = 1;
+        
+        console.log("the letter selected " + letter);
+        const phrase = new Phrase();
+        var isLetterThere = phrase.checkLetter(letter);
+        console.log("Is letter in phrase " + isLetterThere);
+
+        if(isLetterThere){
+            phrase.showMatchedLetter(letter);
+            //console.log("the letter was there so disable the letter is " + letter);
             
-        };
+            keyboard.forEach(function (keyboard, index) {
+                if(letter == keyboard.innerHTML){
+                         keyboard.disabled = true;
+                        keyboard.classList.add('chosen');
+                }
+            });
+          
+
+        }else{
+            game.removeLife(misses);
+            var x = misses++
+            game.checkForWin();
+            keyboard.forEach(function (keyboard, index) {
+                if(letter == keyboard.innerHTML){
+                    keyboard.disabled = true;
+                    keyboard.classList.add('wrong');
+                    
+                }
+            });
+            
+        
+        }
         
     }
+
+    // for(var i = 0; i < keyboard.length;i++){
+                
+    
+    // }
 
 
 
@@ -115,7 +125,7 @@ class Game{
 
         var misses = numOfMisses;
         
-        if(numOfMisses!=true){
+        if(misses!=true){
 
         var youWin = document.getElementById("overlay");
         var element = document.getElementById("game-over-message");
@@ -155,16 +165,15 @@ class Game{
         }
     }
 
-     removeLife(missed){
+    removeLife(missed){
         const heartElements = document.querySelectorAll('.tries img');
         heartElements[this.missed].src = 'images/lostHeart.png';
-        var misses = missed++;
-        this.missed = misses;
-        console.log("you missed:  " + this.missed);
+         var misses = missed++;
+        console.log("you missed:  " + this.missed++);
         if(this.missed == 5){
             game.gameOver(true);
         }
-        return misses
+        return misses;
         
         }
         

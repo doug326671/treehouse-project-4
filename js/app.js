@@ -21,8 +21,42 @@ buttonReset.addEventListener('click',function(){
          
       
 });
-game.handleInteraction();
+//game.handleInteraction();
 //console.log(game.handleInteraction());
 // game.checkForWin();
 
 
+var keyboard = document.querySelectorAll(".key");
+for (var i = 0; i < keyboard.length; i++){
+    keyboard[i].onclick= function (){
+
+        var attribute = this.innerHTML;
+        var letter=attribute;
+        //console.log("the letter selected is " + letter);
+         game.handleInteraction(letter);
+        //console.log("the letter to be displayed is " + letterToBeDisplayed);
+        // if(letterToBeDisplayed){
+        //     game.handleInteraction(letterToBeDisplayed);
+        // }else{
+        //     game.handleInteraction(letterToBeDisplayed);
+        // }
+        
+        
+        var typedDivval = document.getElementById('typedDiv').innerHTML;
+        typedDivval = typedDivval + letter;
+        document.getElementById('typedDiv').innerHTML = typedDivval;
+        
+        game.checkForWin();
+        
+    }
+     
+ };
+
+
+
+//  for (var i = 0; i < keyboard.length; i++){
+//     keyboard[i].onclick= function (){
+//         var attribute = this.innerHTML;
+//         var letter=attribute;
+//     }
+// }
